@@ -77,10 +77,10 @@ def score_away(best):
 def clean_data(df, clean_type=None):
     df = df.drop(df.columns[0], axis=1)
     # Ratio of games lose/played, draws/played
-    #df["stats_away.lose"] = df["stats_away.lose"]/df["stats_away.played"]
-    #df["stats_away.draws"] = df["stats_away.draws"]/df["stats_away.played"]
-    #df["stats_home.lose"] = df["stats_home.lose"]/df["stats_home.played"]
-    #df["stats_home.draws"] = df["stats_home.draws"]/df["stats_home.played"]
+    df["stats_away.lose"] = df["stats_away.lose"]/df["stats_away.played"]
+    df["stats_away.draws"] = df["stats_away.draws"]/df["stats_away.played"]
+    df["stats_home.lose"] = df["stats_home.lose"]/df["stats_home.played"]
+    df["stats_home.draws"] = df["stats_home.draws"]/df["stats_home.played"]
     df = df.drop(columns=["team.id", "team.name","season","league","goals_diff","form","group","stats_home.played","stats_away.played",
                           "stats_home.wins", "stats_away.wins", "stats_home.goals_for", "stats_home.goals_against",
                          "stats_away.goals_for", "stats_away.goals_against"], axis=1)
@@ -157,6 +157,14 @@ def get_all_data(data, target_n):
             all_target[i] = all_target[i] + target
             i = i + 1
     return all_data, all_season, all_names, all_target
+
+# Returns a list of teams names with its season
+def label_team_season(all_names, all_season):
+    dendo_label = []
+    for i in range(len(all_season)):
+        d_l = all_names[i] + " - " + str(all_season[i])
+        dendo_label.append(d_l)
+    return dendo_label
 
 def dendogram_graph(data, best_method, label):
     label = [l[3:] for l in label]
