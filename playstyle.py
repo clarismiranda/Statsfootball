@@ -59,7 +59,7 @@ def get_all(data):
     return all_data, all_target
 
 #pezzali score goals(team)/attempts(team) x attempts(opponent)/goals(opponent)
-def pezzali_data(data, is_train=True):
+def pezzali_data(data, is_train=True, both=False):
 	new_data = pd.DataFrame()
 	values = {'goal_home': 0, 'goals_away': 0}
 	data.fillna(value=values)
@@ -93,4 +93,9 @@ def pezzali_data(data, is_train=True):
 	if is_train:
 		new_data["home_team.name"] = data["home_team.name"]
 		new_data["away_team.name"] = data["away_team.name"]
+	if both:
+		data["diff_pezzali"] = pezzali_diff
+		data["diff_s_fraction"] = shots_fraction
+		data["diff_defensive"] = (data["stats_home.saves"]+data["stats_away.s_blocked"])-(data["stats_away.saves"]+data["stats_home.s_blocked"])
+		return data
 	return new_data
