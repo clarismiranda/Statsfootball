@@ -90,12 +90,12 @@ def pezzali_data(data, is_train=True, both=False):
 	new_data["stats_home.c_yellow"] = data["stats_home.c_yellow"]
 	new_data["season"] = data["season"]
 	new_data["week"] = data["week"]
-	if is_train:
-		new_data["home_team.name"] = data["home_team.name"]
-		new_data["away_team.name"] = data["away_team.name"]
-	if both:
+	if both == True:
 		data["diff_pezzali"] = pezzali_diff
 		data["diff_s_fraction"] = shots_fraction
 		data["diff_defensive"] = (data["stats_home.saves"]+data["stats_away.s_blocked"])-(data["stats_away.saves"]+data["stats_home.s_blocked"])
 		return data
+	if is_train:
+		new_data["home_team.name"] = data["home_team.name"]
+		new_data["away_team.name"] = data["away_team.name"]
 	return new_data

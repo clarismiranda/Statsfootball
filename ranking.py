@@ -64,6 +64,22 @@ def encode_description(row):
     else:
         return 5
 
+def decode_description(row):
+    label = {1: 'Promotion - Champions League (Group Stage)', 
+             1: 'UEFA Champions League',
+             2: 'UEFA Champions League Qualifiers',
+            3: 'Promotion - Europa League (Group Stage)',
+             3: 'UEFA Europa League',
+             4: 'Promotion - Europa League (Qualification)',
+             5: 'None',
+             6: 'Relegation - LaLiga2',
+             6: 'Relegation',
+            }
+    if row in label:
+        return label[row]
+    else:
+        return 'None'
+
 def score_home(best):
     if best != 0:
         return int(best[0]) - int(best[2])
