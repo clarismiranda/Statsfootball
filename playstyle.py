@@ -85,15 +85,24 @@ def pezzali_data(data, is_train=True, both=False):
 	new_data["away_team.id"] = data["away_team.id"]
 	new_data["diff_pezzali"] = pezzali_diff
 	new_data["diff_s_fraction"] = shots_fraction
-	new_data["diff_defensive"] = (data["stats_home.saves"]+data["stats_away.s_blocked"])-(data["stats_away.saves"]+data["stats_home.s_blocked"])
-	new_data["stats_away.c_yellow"] = data["stats_away.c_yellow"]
-	new_data["stats_home.c_yellow"] = data["stats_home.c_yellow"]
+	new_data["diff_defensive"] = ((data["stats_home.s_blocked"]+.01)/(data["stats_away.s_total"]+.01)) - ((data["stats_away.s_blocked"]+.01)/(data["stats_home.s_total"]+.01))
+	new_data["stats_home.c_red"] = data["stats_home.c_red"]
+	new_data["diff_s_off_g"] = data["stats_home.s_off_g"]-data["stats_away.s_off_g"]
+	new_data["diff_s_total"] = data["stats_home.s_total"]-data["stats_away.s_total"]
+	new_data["diff_s_out"] = data["stats_home.s_out"]-data["stats_away.s_out"]
+	new_data["diff_saves"] = data["stats_home.saves"]-data["stats_away.saves"]
+	new_data["stats_home.s_blocked"] = data["stats_home.s_blocked"]
+	new_data["stats_away.s_blocked"] = data["stats_away.s_blocked"]
 	new_data["season"] = data["season"]
 	new_data["week"] = data["week"]
 	if both == True:
 		data["diff_pezzali"] = pezzali_diff
 		data["diff_s_fraction"] = shots_fraction
-		data["diff_defensive"] = (data["stats_home.saves"]+data["stats_away.s_blocked"])-(data["stats_away.saves"]+data["stats_home.s_blocked"])
+		data["diff_defensive"] = ((data["stats_home.s_blocked"]+.01)/(data["stats_away.s_total"]+.01)) - ((data["stats_away.s_blocked"]+.01)/(data["stats_home.s_total"]+.01))
+		data["diff_s_off_g"] = data["stats_home.s_off_g"]-data["stats_away.s_off_g"]
+		data["diff_s_total"] = data["stats_home.s_total"]-data["stats_away.s_total"]
+		data["diff_s_out"] = data["stats_home.s_out"]-data["stats_away.s_out"]
+		data["diff_saves"] = data["stats_home.saves"]-data["stats_away.saves"]
 		return data
 	if is_train:
 		new_data["home_team.name"] = data["home_team.name"]
