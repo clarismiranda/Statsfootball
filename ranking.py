@@ -4,6 +4,7 @@ from scipy.spatial.distance import pdist
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import re
 
 class Attr:
     def __init__(self, name, value, value2=None, value3=None):
@@ -25,7 +26,7 @@ class Attr:
     def new_name(self, name):
         return name[3:]
     def val2(self, name):
-        return name[0:3]
+        return str(re.findall(r'\d+', name[0:3])[0])
     def val3(self, name):
         return name[-4:]
 
@@ -110,7 +111,11 @@ def score_home(best):
         Returns: the value of the best streaks for home team on scores
     """
     if best != 0:
-        return int(best[0]) - int(best[2])
+        best = best.split('-')
+        try:
+            return int(best[0]) - int(best[1])
+        except:
+            print(best)
     return best
 
 def score_away(best):
@@ -118,7 +123,11 @@ def score_away(best):
         Returns: the value of the best streaks for away team on scores
     """
     if best != 0:
-        return int(best[2]) - int(best[0])
+        best = best.split('-')
+        try:
+            return int(best[1]) - int(best[0])
+        except:
+            print(best)
     return best
 
 def clean_data(df, clean_type=None):

@@ -36,6 +36,8 @@ def clean_data(df):
     # Posession % to decimal
     df["stats_away.possession"] = df["stats_away.possession"].apply(lambda x: (int(str(x).strip('%'))/100))
     df["stats_home.possession"] = df["stats_home.possession"].apply(lambda x: (int(str(x).strip('%'))/100))
+    df["week"] = pd.to_numeric(df["week"], errors = 'coerce')
+    df.dropna(inplace = True)
     return df
 
 def df_season(country, league, season, week, drop_goals=True):

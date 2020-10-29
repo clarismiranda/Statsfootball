@@ -82,7 +82,7 @@ for league in dirLeague:
             curr_standings = current_standings[team_id]
             
             # Gets standings from a team if they have not being added
-            for week in list(range(0, 39, 1)):
+            for week in list(range(0, 38, 1)):
                 week = str(week)
                 if week not in visited_standings:
                     visited_standings[week] = {}
@@ -110,6 +110,9 @@ for league in dirLeague:
                         away_team = str(fixture["team_away"]["id"])
                         w = fixture["week"]
                         w = ''.join(filter(str.isdigit, w))
+                        # Case when is europa classifiers
+                        if w == '':
+                            continue
                         # Gets standings from away_team
                         if away_team in visited_standings[w]:
                             away_team_stands = visited_standings[w][away_team]

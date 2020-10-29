@@ -60,6 +60,7 @@ for league in dirLeague:
             if season == start_season:
             	curr_week = int(week)
             else:
+                # Up to 40 when europa league playoffs
             	curr_week = 38
             c_w = list(range(curr_week, -1, -1))
             i_w = 0
