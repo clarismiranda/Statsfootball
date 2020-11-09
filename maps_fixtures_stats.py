@@ -23,6 +23,7 @@ else:
 
 # Dealing with historicity
 curr_week = int(week)
+save_week = week
 year_window = int(window)
 start_season = int(season)
 seasons = list(range(start_season, start_season - year_window, -1))
@@ -174,8 +175,8 @@ for league in dirLeague:
                 else:
                     continue
         # Initializes all current standings
-        if season == int(start_season):
-            curr_week = int(week)
+        if season == start_season:
+            curr_week = save_week
         else:
             curr_week = 38
         # csv to save

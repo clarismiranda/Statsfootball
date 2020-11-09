@@ -3,3 +3,6 @@
 143/
 556/
 model/
+
+# CSV files
+*.csv

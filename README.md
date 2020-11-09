@@ -23,7 +23,7 @@ FootballMLP needs the next libraries to work:
 Everything you want to retrieve can be find by using [API-Football](https://www.api-football.com/). But FootballMLP has released a library for it [apifootballpy](https://github.com/clarismiranda/apifootball/tree/lastFixtures)
 
 ### Dataset for Standings
-This creates a whole dataset of teams' standings up to a season and a week (the last week played), the window parameter controls how many season before the current season wants to be save.\
+This creates a whole dataset of teams' standings up to a season and a week (the last week played), the window parameter controls how many season before the current season wants to be saved.\
 python maps_teams_stats.py --country --league --season --week --window
 ```bash
 python maps_teams_stats.py DE 78 2020 4 5
@@ -31,12 +31,31 @@ python maps_teams_stats.py DE 78 2020 4 5
 > Note: by using a window of 5, it is expected to save the standings from 2016 to 2020.
 
 ### Dataset for Fixtures
-This creates a whole dataset of league's fixtures up to a season and a week (the last week played) mapped with the team's last standings, the window parameter controls how many season before the current season wants to be save.\
+This creates a whole dataset of league's fixtures up to a season and a week (the last week played) mapped with the team's last standings, the window parameter controls how many season before the current season wants to be saved.\
 python maps_fixtures_stats.py --country --league --season --week --window
 ```bash
 python maps_fixtures_stats.py DE 78 2020 4 5
 ```
 > Note: by using a window of 5, it is expected to save the standings from 2016 to 2020.
+
+### Automate Datasets
+Here are several standings and fixtures commands of different leagues to be executed by one command.\
+.\maps_stats.sh --season --window
+```bash
+./maps_stats.sh 2020 1
+```
+> Note: first mark the file as executable by running:
+```bash 
+chmod +x maps_stats.sh
+```
+
+### Dataset for Odds
+This creates a whole dataset of all league's odds in a given season window, the window parameter controls how many season before the current season wants to be saved.\
+python maps_odds.py --season --window
+```bash
+python maps_odds.py 2020 1
+```
+> Note: by using a window of 1, it is expected to save only odds for season 2020.
 
 ## Testing FootballMLP
 

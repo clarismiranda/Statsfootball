@@ -19,9 +19,11 @@ def get_target(df):
         target.append(get_status(row))
     return target
 
-def clean_data(df):
+def clean_data(df, drop_fixture):
     df = df.drop(df.columns[0], axis=1)
-    df = df.drop(columns=["league","id"], axis=1)
+    if drop_fixture:
+    	df = df.drop(columns=["id"], axis=1)
+    df = df.drop(columns=["league"], axis=1)
     df["home_team.id"] = df["team_home.team.id"]
     df["away_team.id"] = df["team_away.team.id"]
     df["home_team.name"] = df["team_home.team.name"]
@@ -40,13 +42,13 @@ def clean_data(df):
     df.dropna(inplace = True)
     return df
 
-def df_season(country, league, season, week, drop_goals=True):
+def df_season(country, league, season, week, drop_goals=True, drop_fixture=True):
     dirCountry = '../' + country + '/'
     dirName = dirCountry + league + '/' + str(season) + '/'
     file_title = str(season) + '_' + str(week) + '.csv'
     csv_file = dirName + file_title
     df = pd.read_csv(csv_file)
-    df = clean_data(df)
+    df = clean_data(df, drop_fixture)
     target = get_target(df)
     if drop_goals:
         df = df.drop(columns=["goals_away","goals_home"], axis=1) 
@@ -61,7 +63,7 @@ def get_all(data):
     return all_data, all_target
 
 #pezzali score goals(team)/attempts(team) x attempts(opponent)/goals(opponent)
-def pezzali_data(data, is_train=True, both=False):
+def pezzali_data(data, is_train=True, both=False, is_prediction=False):
 	new_data = pd.DataFrame()
 	values = {'goal_home': 0, 'goals_away': 0}
 	data.fillna(value=values)
@@ -97,6 +99,8 @@ def pezzali_data(data, is_train=True, both=False):
 	new_data["stats_away.s_blocked"] = data["stats_away.s_blocked"]
 	new_data["season"] = data["season"]
 	new_data["week"] = data["week"]
+	if is_prediction:
+		new_data["id"] = data["id"]
 	if both == True:
 		data["diff_pezzali"] = pezzali_diff
 		data["diff_s_fraction"] = shots_fraction
