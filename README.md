@@ -58,5 +58,7 @@ python maps_odds.py 2020 1
 > Note: by using a window of 1, it is expected to save only odds for season 2020.
 
 ## Testing FootballMLP
+[evaluation.ipynb](https://github.com/clarismiranda/Statsfootball/blob/cleaner/evaluation.ipynb) contains the evaluation by league.
 
 ## Predicting with FootballMLP
+[prediction.ipynb](https://github.com/clarismiranda/Statsfootball/blob/cleaner/prediction.ipynb) contains the prediction of the weekgame.
