@@ -6,3 +6,14 @@ model/
 
 # CSV files
 *.csv
+
+# Experimental files
+datascience_stats.ipynb
+prediction_odds.ipynb
+trainingmodel_es.ipynb
+trainingset_es.ipynb
+trainingset_standings.ipynb
+visualization_faketest.ipynb
+visualization_odds.ipynb
+visualization_paneldata.ipynb
+visualization_standings.ipynb
